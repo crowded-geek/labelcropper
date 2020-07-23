@@ -8,6 +8,8 @@ while 1:
   removed = [f for f in before if not f in after]
   if added:
       print "Added: ", ", ".join (added)
+      for k in added:
+        os.system("python crop.py "+k)
   if removed:
       print "Removed: ", ", ".join (removed)
   before = after
