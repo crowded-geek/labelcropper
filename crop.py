@@ -16,7 +16,6 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   
   left2 = 0
   top2 = 372
-
   right2 = 0
   bottom2 = 0
 
@@ -38,9 +37,9 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   # A List containing the system printers
   all_printers = [printer[2] for printer in win32print.EnumPrinters(2)]
   # Ask the user to select a printer
-  printer_num = int(input("Choose a printer:\n"+"\n".join([f"{n} {p}" for n, p in enumerate(all_printers)])+"\n"))
+  #printer_num = int(input("Choose a printer:\n"+"\n".join([f"{n} {p}" for n, p in enumerate(all_printers)])+"\n"))
   # set the default printer
-  win32print.SetDefaultPrinter(all_printers[printer_num])
+  win32print.SetDefaultPrinter(all_printers[1])
   win32api.ShellExecute(0, "print", target, None,  ".",  0)
 
   pdf2 = PdfFileReader(open(original, 'rb'))
@@ -52,15 +51,14 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   ous2 = open(target2, 'wb')
   out2.write(ous2)
   ous2.close()
+
   # A List containing the system printers
   all_printers = [printer[2] for printer in win32print.EnumPrinters(2)]
   # Ask the user to select a printer
-  printer_num = int(input("Choose a printer:\n"+"\n".join([f"{n} {p}" for n, p in enumerate(all_printers)])+"\n"))
+  #printer_num = int(input("Choose a printer:\n"+"\n".join([f"{n} {p}" for n, p in enumerate(all_printers)])+"\n"))
   # set the default printer
-  win32print.SetDefaultPrinter(all_printers[printer_num])
+  win32print.SetDefaultPrinter(all_printers[9])
   win32api.ShellExecute(0, "print", target2, None,  ".",  0)
-
-
  
 else:
   print('EXAMPLE: crop.py original.pdf')
