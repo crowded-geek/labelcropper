@@ -64,6 +64,6 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   time.sleep(2)
   win32api.ShellExecute(0, "print", "H:\\test folder\\kjop\\"+target2, None,  ".",  0)
   time.sleep(3)
-  os.system("mv *.pdf parent")
+  os.system("move *.pdf parent")
 else:
   print('EXAMPLE: crop.py original.pdf')
