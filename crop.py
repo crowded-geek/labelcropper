@@ -30,17 +30,19 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
     page.mediaBox.upperRight = (page.mediaBox.getUpperRight_x() - right, page.mediaBox.getUpperRight_y() - top)
     page.mediaBox.lowerLeft  = (page.mediaBox.getLowerLeft_x()  + left,  page.mediaBox.getLowerLeft_y()  + bottom)
     out.addPage(page)    
-  ous = open(target, 'wb')
+  ous = open("H:\\test folder\\kop\\"+target, 'wb')
   out.write(ous)
   ous.close()
 
   # A List containing the system printers
   all_printers = [printer[2] for printer in win32print.EnumPrinters(2)]
   # Ask the user to select a printer
-  #printer_num = int(input("Choose a printer:\n"+"\n".join([f"{n} {p}" for n, p in enumerate(all_printers)])+"\n"))
+  # printer_num = int(input("Choose a printer:\n"+"\n".join([f"{n} {p}" for n, p in enumerate(all_printers)])+"\n"))
   # set the default printer
+  time.sleep(3)
   win32print.SetDefaultPrinter(all_printers[1])
-  win32api.ShellExecute(0, "print", target, None,  ".",  0)
+  time.sleep(2)
+  win32api.ShellExecute(0, "print", "H:\\test folder\\kop\\"+target, None,  ".",  0)
 
   pdf2 = PdfFileReader(open(original, 'rb'))
   out2 = PdfFileWriter()
@@ -48,17 +50,20 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
       page.mediaBox.upperRight = (page.mediaBox.getUpperRight_x() - right2, page.mediaBox.getUpperRight_y() - top2)
       page.mediaBox.lowerLeft = (page.mediaBox.getLowerLeft_x() + left2, page.mediaBox.getLowerLeft_y() + bottom2)
       out2.addPage(page)
-  ous2 = open(target2, 'wb')
+  ous2 = open("H:\\test folder\\kjop\\"+target2, 'wb')
   out2.write(ous2)
   ous2.close()
-
+  
   # A List containing the system printers
   all_printers = [printer[2] for printer in win32print.EnumPrinters(2)]
   # Ask the user to select a printer
-  #printer_num = int(input("Choose a printer:\n"+"\n".join([f"{n} {p}" for n, p in enumerate(all_printers)])+"\n"))
+  # printer_num =int(input("Choose a printer:\n"+"\n".join([f"{n} {p}" for n, p in enumerate(all_printers)])+"\n"))
   # set the default printer
+  time.sleep(2)
   win32print.SetDefaultPrinter(all_printers[9])
-  win32api.ShellExecute(0, "print", target2, None,  ".",  0)
- 
+  time.sleep(2)
+  win32api.ShellExecute(0, "print", "H:\\test folder\\kjop\\"+target2, None,  ".",  0)
+  time.sleep(3)
+  os.system("mv *.pdf parent")
 else:
   print('EXAMPLE: crop.py original.pdf')
