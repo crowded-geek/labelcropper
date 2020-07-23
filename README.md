@@ -9,6 +9,6 @@ python2 crop.py input.pdf
 ```
 ## Output : 2 files top and bottom labels
 ```
-input.top.pdf
-input.bottom.pdf
+input.top.cropped.pdf
+input.bottom.cropped.pdf
 ```
