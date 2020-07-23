@@ -23,6 +23,8 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   from PyPDF2 import PdfFileWriter, PdfFileReader
   import os
   import time
+  import win32print, win32api
+
   pdf = PdfFileReader(open(original, 'rb'))
   out = PdfFileWriter()
   for page in pdf.pages:
@@ -33,7 +35,14 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   out.write(ous)
   ous.close()
 
-  os.startfile(target, "print")
+  printdefaults = {"DesiredAccess": win32print.PRINTER_ALL_ACCESS} # Doesn't work with PRINTER_ACCESS_USE
+  handle = win32print.OpenPrinter("TSC TTP-244 Pro", printdefaults)
+  level = 2
+  attributes = win32print.GetPrinter(handle, level)
+  attributes['pDevMode'].Duplex = 3   #flip over
+  win32print.SetPrinter(handle, level, attributes, 0)
+  win32print.GetPrinter(handle, level)['pDevMode'].Duplex
+  win32api.ShellExecute(0,'print',target,'.','.',0)
 
   pdf2 = PdfFileReader(open(original, 'rb'))
   out2 = PdfFileWriter()
@@ -45,7 +54,14 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   out2.write(ous2)
   ous2.close()
 
-  os.startfile(target2, "print")
+  printdefaults = {"DesiredAccess": win32print.PRINTER_ALL_ACCESS} # Doesn't work with PRINTER_ACCESS_USE
+  handle = win32print.OpenPrinter("EPSON L3150 Series", printdefaults)
+  level = 2
+  attributes = win32print.GetPrinter(handle, level)
+  attributes['pDevMode'].Duplex = 3   #flip over
+  win32print.SetPrinter(handle, level, attributes, 0)
+  win32print.GetPrinter(handle, level)['pDevMode'].Duplex
+  win32api.ShellExecute(0,'print',target2,'.','.',0)
 
 else:
   print('EXAMPLE: crop.py original.pdf')
