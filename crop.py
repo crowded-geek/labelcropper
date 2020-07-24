@@ -24,7 +24,8 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   import time
   import win32print, win32api, glob
 
-  pdf = PdfFileReader(open(original, 'rb'))
+  x = open(original, 'rb')
+  pdf = PdfFileReader(x)
   out = PdfFileWriter()
   for page in pdf.pages:
     page.mediaBox.upperRight = (page.mediaBox.getUpperRight_x() - right, page.mediaBox.getUpperRight_y() - top)
@@ -33,6 +34,7 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   ous = open("H:\\test folder\\kop\\"+target, 'wb')
   out.write(ous)
   ous.close()
+  x.close()
 
   # A List containing the system printers
   all_printers = [printer[2] for printer in win32print.EnumPrinters(2)]
@@ -44,7 +46,8 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   time.sleep(2)
   win32api.ShellExecute(0, "print", "H:\\test folder\\kop\\"+target, None,  ".",  0)
 
-  pdf2 = PdfFileReader(open(original, 'rb'))
+  x = open(original, 'rb')
+  pdf2 = PdfFileReader(x)
   out2 = PdfFileWriter()
   for page in pdf2.pages:
       page.mediaBox.upperRight = (page.mediaBox.getUpperRight_x() - right2, page.mediaBox.getUpperRight_y() - top2)
@@ -53,6 +56,7 @@ if __name__ == '__main__' and sys.argv[1][-3:].upper() == 'PDF':
   ous2 = open("H:\\test folder\\kjop\\"+target2, 'wb')
   out2.write(ous2)
   ous2.close()
+  x.close()
   
   # A List containing the system printers
   all_printers = [printer[2] for printer in win32print.EnumPrinters(2)]
